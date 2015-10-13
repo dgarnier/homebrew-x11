@@ -14,13 +14,16 @@ class Openmotif < Formula
   depends_on "autoconf" => :build
   depends_on "libtool" => :build
   depends_on "pkg-config" => :build
-  depends_on "flex" => :build
   depends_on "fontconfig"
   depends_on "jpeg" => :optional
   depends_on "libpng" => :optional
   depends_on :x11
 
   option :universal
+
+  if build.universal?
+    depends_on "flex" => [:build, :universal]
+  end
 
   conflicts_with "lesstif",
     :because => "Lesstif and Openmotif are complete replacements for each other"
